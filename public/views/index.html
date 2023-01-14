@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--style-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+        integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="frameworks/bulma.min.css" />
+    <link rel="stylesheet" href="frameworks/Chart.min.css" />
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="style/index.css" />
+    <!--<link rel="stylesheet" href="style/debug.css" />-->
+
+    <!--scripts-->
+    <script src="frameworks/vue.min.js"></script>
+    
+    <link rel="stylesheet" href="frameworks/vue-datetime.min.css">
+    <script src="frameworks/luxon.min.js"></script>
+    <script src="frameworks/weekstart/full.js"></script>
+    <script src="frameworks/weekstart/main.js"></script>
+    <script src="frameworks/vue-datetime.min.js"></script>
+
+    <script src="https://unpkg.com/vuejs-datepicker"></script>
+
+    <script src="frameworks/axios.min.js"></script>
+    <script src="frameworks/chart.min.js"></script>
+
+
+    <!--OURS SCRIPTS-->
+    <script src="javascript/lib.js"></script>
+
+    <script src="javascript/components/navbar.component.js"></script>
+    <script src="javascript/components/foobar.component.js"></script>
+
+    <script src="javascript/components/peso/form.component.js"></script>
+    <script src="javascript/components/peso/list.component.js"></script>
+    <script src="javascript/components/peso/graph-pxd.component.js"></script>
+    <script src="javascript/components/kcal/form.component.js"></script>
+    <script src="javascript/components/kcal/list.component.js"></script>
+    <script src="javascript/components/kcal/graph-kxt.component.js"></script>
+    <script src="javascript/components/kcal/graph-kxd.component.js"></script>
+
+
+    <title>Peso Corporeo - Home</title>
+    <style>
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted #4A4A4A;
+            font-size: 1.1rem;
+          }
+          
+          .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 150px;
+            background-color: #4A4A4A;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 3px 0;
+            position: absolute;
+            z-index: 1;
+            top: -13px;
+            right: 110%;
+          }
+          
+          .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent transparent #4A4A4A;
+          }
+          .tooltip:hover .tooltiptext {
+            visibility: visible;
+          }
+    </style>
+</head>
+
+<body>
+    <div id="vue">
+        <nav-bar></nav-bar>
+
+        <div class="tabs">
+            <ul>
+                <li :class="[forms ? 'is-active': '' ]" @click="forms=true"><a>Forms</a></li>
+                <li :class="[!forms ? 'is-active': '' ]" @click="forms=false"><a>Grafici</a></li>
+            </ul>
+        </div>
+        
+        <div class="forms-lists" v-show="forms">
+            <!--Box 1: KCAL-->
+            <div id="kcal" style="padding: 2rem">
+                <!--Col 1: inserimento kcal + tabella dati-->
+                <kcal-form :total=totalToday @add-kcal="addKcal($event)"></kcal-form>
+                <hr>
+                <kcal-list :dati=dati @update="upd($event)" @del="del($event)"></kcal-list>
+            </div>
+            <hr>
+            <!--Box 2: PESO-->
+            <div id="peso" style="padding: 2rem">
+                <!--Col 1: inserimento peso + tabella dati-->
+                <peso-form @add-peso="addPeso($event)"></peso-form>
+                <hr>
+                <peso-list :dati=dati @update="upd($event)" @del="del($event)"></peso-list>
+            </div>
+        </div>
+
+        <div id="graphs" class="container" v-show="!forms">
+            <kcal-kxd :dati=dati></kcal-kxd>
+            <hr>
+            <kcal-kxt :dati=dati></kcal-kxt>
+            <hr>
+            <peso-pxd :dati=dati></peso-pxd>
+        </div>
+        <foo-bar></foo-bar>
+    </div>
+</body>
+<script src="javascript/vue.js"></script>
+
+</html>
