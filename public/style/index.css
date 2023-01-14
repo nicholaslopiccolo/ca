@@ -1,7 +1,0 @@
-.left-arrow{
-    background-image: url('../icons/arrow.svg');
-}
-.right-arrow{
-    background-image: url('../icons/arrow.svg');
-    transform: rotate(180deg);
-}

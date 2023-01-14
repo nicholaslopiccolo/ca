@@ -1,0 +1,35 @@
+{
+  "name": "front",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build && rm -r ../back/public/* && mv ./dist/* ../back/public",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/vue-fontawesome": "^2.0.2",
+    "axios": "^0.27.2",
+    "buefy": "^0.9.10",
+    "core-js": "^3.6.5",
+    "vue": "^2.6.11",
+    "vue-google-signin-button": "^1.0.4",
+    "vue-router": "^3.5.2"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^6.1.1",
+    "@vue/cli-plugin-babel": "^5.0.6",
+    "@vue/cli-plugin-router": "^5.0.6",
+    "@vue/cli-service": "^5.0.6",
+    "vue-cli-plugin-buefy": "~0.3.8",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
